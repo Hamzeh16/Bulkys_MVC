@@ -1,0 +1,30 @@
+﻿@using BulkyBookModels.Model
+@model List<AffiliatePostRequest>
+<h2>Pending Post Requests</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Affiliate ID</th>
+            <th>Post Title</th>
+            <th>Post Content</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td>@request.AffiliateId</td>
+                <td>@request.PostTitle</td>
+                <td>@request.PostContent</td>
+                <td>
+                    <form action="/Admin/ApprovePostRequest" method="post">
+                        <input type="hidden" name="requestId" value="@request.RequestId" />
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

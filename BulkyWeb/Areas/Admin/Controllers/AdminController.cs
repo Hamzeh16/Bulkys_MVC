@@ -1,35 +1,56 @@
 ﻿using BulkyBookDataAccess.Data;
+using BulkyBookDataAccess.Repositray;
+using BulkyBookDataAccess.Repositray.IRepositray;
+using BulkyBookModels.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class AdminController : Controller
     {
-        private readonly AppDbContext? _db;
-        public AdminController(AppDbContext db)
+        private readonly IUnitOfWorkRepositray _UnitOfWorkRepositra;
+
+        public AdminController(IUnitOfWorkRepositray categoryRepositray)
         {
-            _db = db;
+            _UnitOfWorkRepositra = categoryRepositray;
         }
         // Display pending post requests
-        public ActionResult PendingPostRequests()
+        public IActionResult PendingPostRequests()
         {
-            var pendingRequests = _db?.AffiliatePostRequests.Where(r => !r.IsApproved).ToList();
-            return View(pendingRequests);
+            List<Category> objCategoryList = _UnitOfWorkRepositra.Category.GetAll().ToList();
+            return View(objCategoryList);
         }
 
         // Approve a post request
         [HttpPost]
-        public ActionResult ApprovePostRequest(int requestId)
+        public IActionResult PendingPostRequests(Category category , string action, int? ID)
         {
-            var request = _db?.AffiliatePostRequests.Find(requestId);
-            if (request != null)
+            if (ID == 0 || ID == null)
             {
-                request.IsApproved = true;
-                request.ApprovedDate = DateTime.Now;
-                _db?.SaveChanges();
+                return NotFound();
             }
+            category = _UnitOfWorkRepositra.Category.Get(c => c.ID == ID);
+            if (category != null)
+            {
+                if (action == "approve")
+                {
+                    // Handle approve logic
+                    category.IsApproved = true;
+                    category.IsAdded = true;
+                }
+                else if (action == "reject")
+                {
+                    // Handle reject logic
+                    category.IsApproved=false;
+                    category.IsAdded = false;
+                }
+                _UnitOfWorkRepositra.Category.Update(category);
+                TempData["success"] = "Category Updated successfully";
 
+                _UnitOfWorkRepositra.Save();
+            }
             return RedirectToAction("PendingPostRequests");
         }
     }

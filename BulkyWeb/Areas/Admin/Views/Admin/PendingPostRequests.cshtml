@@ -1,31 +1,35 @@
 ﻿@using BulkyBookModels.Model
-@model List<AffiliatePostRequest>
+@model List<Category>
 <h2>Pending Post Requests</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Affiliate ID</th>
-            <th>Post Title</th>
-            <th>Post Content</th>
-            <th>Actions</th>
+            <th>
+                Category Name
+            </th>
+            <th>
+                Display Order
+            </th>
+            <th>
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var request in Model)
         {
             <tr>
-                <td>@request.AffiliateId</td>
-                <td>@request.PostTitle</td>
-                <td>@request.PostContent</td>
+                <td>@request.NAME</td>
+                <td>@request.DISPLAYORDER</td>
                 <td>
-                    <form action="/Admin/ApprovePostRequest" method="post">
-                        <input type="hidden" name="requestId" value="@request.RequestId" />
-                        <button type="submit" class="btn btn-success">Approve</button>
+                    <form method="post">
+                        <input type="hidden" name="ID" value="@request.ID" />
+                        <button type="submit" name="action" value="approve" asp-route-id="@request.ID" class="btn btn-success">Approve</button>
+                        <button type="submit" name="action" value="reject" asp-route-id="@request.ID" class="btn btn-danger">Reject</button>
                     </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-@* ??????????????????????????????? *@

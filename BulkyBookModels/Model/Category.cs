@@ -14,5 +14,7 @@ namespace BulkyBookModels.Models
         [Range(1, 100,ErrorMessage ="The Number Between 1 to 100")]
         [DisplayName("Display Order")]
         public int DISPLAYORDER { get; set; }
+        public bool IsApproved { get; set; } = false; // Default to false
+        public bool IsAdded { get; set; } = false; // Default to false
     }
 }

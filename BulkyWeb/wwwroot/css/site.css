@@ -32,3 +32,36 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.center-container {
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.light {
+    width: 10px; /* Size of the light */
+    height: 10px; /* Size of the light */
+    border-radius: 50%; /* Make it circular */
+    display: inline-block;
+    margin:10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Slight glow effect */
+}
+
+/* Red light (e.g., for inactive status) */
+.red {
+    background-color: red;
+}
+
+/* Green light (e.g., for active status) */
+.green {
+    background-color: green;
+}
+
+.yelow{
+    background-color:yellow;
+}
+
+.TextCenter{
+    text-align:center;
+}

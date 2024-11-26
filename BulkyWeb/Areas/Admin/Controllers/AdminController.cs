@@ -1,13 +1,13 @@
-﻿using BulkyBookDataAccess.Data;
-using BulkyBookDataAccess.Repositray;
-using BulkyBookDataAccess.Repositray.IRepositray;
+﻿using BulkyBookDataAccess.Repositray.IRepositray;
 using BulkyBookModels.Models;
+using BulkyBookUtility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class AdminController : Controller
     {
         private readonly IUnitOfWorkRepositray _UnitOfWorkRepositra;
@@ -20,6 +20,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         public IActionResult PendingPostRequests()
         {
             List<Category> objCategoryList = _UnitOfWorkRepositra.Category.GetAll().ToList();
+            objCategoryList = objCategoryList.Where(x => x.IsAdded != x.IsApproved).ToList();
             return View(objCategoryList);
         }
 

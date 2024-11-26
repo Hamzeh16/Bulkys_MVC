@@ -101,29 +101,28 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             /// <summary>
             /// Roles For User , Admin
             /// </summary>
-            public string? Role { get; set; }
+            public string Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
             [Required]
             public string Name { get; set; }
 
-            public string? StreetAddress { get; set; }
-            public string? City { get; set; }
-            public string? State { get; set; }
-            public string? PostalCode { get; set; }
-            public string? PhoneNumber { get; set; }
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            [Display(Name = "ID NUMBER")]
+            public int IDNUMBER { get; set; }
         }
 
-
+        
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (!_roleManager.RoleExistsAsync(SD.Role_Customer).GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(SD.Role_Student).GetAwaiter().GetResult())
             {
-                await _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer));
                 await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
-                await _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee));
-                await _roleManager.CreateAsync(new IdentityRole(SD.Role_Company));
+                await _roleManager.CreateAsync(new IdentityRole(SD.Role_Student));
+                await _roleManager.CreateAsync(new IdentityRole(SD.Role_Docter));
             }
 
             Input = new()
@@ -151,10 +150,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.Name = Input.Name;
                 user.Email = Input.Email;
-                user.State = Input.State;
-                user.StreetAddress = Input.StreetAddress;
-                user.PhoneNumber = Input.PhoneNumber;
-                user.PostalCode = Input.PostalCode;
+                user.IDNUMBER = Input.IDNUMBER;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

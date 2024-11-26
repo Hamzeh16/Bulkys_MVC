@@ -4,6 +4,7 @@ using BulkyBookDataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BulkyBookDataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241126171836_EditField")]
+    partial class EditField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +55,7 @@ namespace BulkyBookDataAccess.Migrations
 
                     b.HasKey("RequestId");
 
-                    b.ToTable("AffiliatePostRequests", (string)null);
+                    b.ToTable("AffiliatePostRequests");
                 });
 
             modelBuilder.Entity("BulkyBookModels.Model.Product", b =>
@@ -92,7 +95,7 @@ namespace BulkyBookDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("BulkyBookModels.Models.Category", b =>
@@ -119,7 +122,7 @@ namespace BulkyBookDataAccess.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

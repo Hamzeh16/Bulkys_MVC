@@ -2,9 +2,9 @@ using BulkyBookModels.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace BulkyWeb.Areas.Custmer.Controllers
+namespace BulkyWeb.Areas.Student.Controllers
 {
-    [Area("Custmer")]
+    [Area("Student")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

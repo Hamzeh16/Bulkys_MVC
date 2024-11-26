@@ -8,9 +8,8 @@ namespace BulkyBookModels.Model
         [Required]
         public string Name { get; set; }
 
-        public string? StreetAddress { get; set; }
-        public string? City { get; set; }
-        public string? State { get; set; }
-        public string? PostalCode { get; set; }
+        [Required]
+        [Display(Name = "ID NUMBER")]
+        public int IDNUMBER { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyWeb.Controllers
 {
-    [Area("Custmer")]
+    [Area("Student")]
     public class AffiliatePostRequestController : Controller
     {
         private readonly AppDbContext _db;

@@ -29,5 +29,21 @@ namespace BulkyBookDataAccess.Data
         /// </summary>
         public DbSet<AffiliatePostRequest> AffiliatePostRequests { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+             //SeedRoles(builder);
+        }
+
+        private static void SeedRoles(ModelBuilder builder)
+        {
+            builder.Entity<IdentityRole>().HasData
+                (
+            new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+            new IdentityRole() { Name = "Company", ConcurrencyStamp = "2", NormalizedName = "Docter" },
+            new IdentityRole() { Name = "Student", ConcurrencyStamp = "3", NormalizedName = "Student" }
+                );
+        }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using BulkyBookDataAccess.Repositray.IRepositray;
 using BulkyBookModels.Models;
+using BulkyBookUtility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkyWeb.Areas.Custmer.Controllers
+namespace BulkyWeb.Areas.Student.Controllers
 {
-    [Area("Custmer")]
+    [Area("Student")]
+    [Authorize(Roles = $"{SD.Role_Admin},{SD.Role_Customer}")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWorkRepositray _UnitOfWorkRepositra;
@@ -24,6 +27,7 @@ namespace BulkyWeb.Areas.Custmer.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
+            category.IsAdded = true;
             _UnitOfWorkRepositra.Category.Add(category);
             _UnitOfWorkRepositra.Save();
             TempData["success"] = "Category Created successfully";

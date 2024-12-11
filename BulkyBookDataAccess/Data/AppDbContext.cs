@@ -27,7 +27,7 @@ namespace BulkyBookDataAccess.Data
         /// <summary>
         /// AffiliatePostRequest Table
         /// </summary>
-        public DbSet<BookingPagecs> BookingPage{ get; set; }
+        public DbSet<BookingPagecs> BookingPages{ get; set; }
 
         /// <summary>
         /// AffiliatePostRequest Table

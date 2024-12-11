@@ -20,8 +20,7 @@ namespace BulkyBookDataAccess.Repositray
 
         public void Update(BookingPagecs obj)
         {
-            _db.BookingPage.Update(obj);
+            _db.BookingPages.Update(obj);
         }
     }
-    
 }

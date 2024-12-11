@@ -1,5 +1,5 @@
-﻿using BulkyBookDataAccess.Repositray;
-using BulkyBookDataAccess.Repositray.IRepositray;
+﻿using BulkyBookDataAccess.Repositray.IRepositray;
+using BulkyBookModels.Model;
 using BulkyBookModels.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,8 +15,8 @@ namespace BulkyWeb.Areas.Docter.Controllers
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _UnitOfWorkRepositra.Category.GetAll().ToList();
-            return View(objCategoryList);
+            List<BookingPagecs> objBookingPageList = _UnitOfWorkRepositra.BookingPages.GetAll().ToList();
+            return View(objBookingPageList);
         }
         public IActionResult Create()
         {
@@ -78,7 +78,6 @@ namespace BulkyWeb.Areas.Docter.Controllers
         }
         public IActionResult BookPage()
         {
-
             return View();
         }
     }

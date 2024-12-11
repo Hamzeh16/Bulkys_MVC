@@ -4,7 +4,7 @@
     {
         ICategoryRepositray Category { get; }
         IProductRepositray Product { get; set; }
-        IBookingPage bookingPage { get; set; }
+        IBookingPage BookingPages { get; set; }
        
         void Save();
     }

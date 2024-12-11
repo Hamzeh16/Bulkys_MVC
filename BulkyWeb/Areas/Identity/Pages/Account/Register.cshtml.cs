@@ -109,6 +109,11 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             public string Name { get; set; }
 
             public string PhoneNumber { get; set; }
+            public string Majer { get; set; }
+            public string Office { get; set; }
+            public string Rank { get; set; }
+            [DataType(DataType.Upload)]
+            public IFormFile ImageUrl { get; set; }
 
             [Required]
             [Display(Name = "ID NUMBER")]
@@ -144,6 +149,24 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                // تحديد المجلد الذي سيتم تخزين الملفات فيه
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+
+                // التأكد من أن المجلد موجود
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                // تحديد المسار الذي سيتم تخزين السيرة الذاتية فيه
+                var filePath = Path.Combine(uploadsFolder, Input.ImageUrl.FileName);
+
+                // تخزين الملف في المجلد
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Input.ImageUrl.CopyToAsync(stream);  // نسخ محتويات الملف إلى المجلد
+                }
+
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -151,6 +174,11 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 user.Name = Input.Name;
                 user.Email = Input.Email;
                 user.IDNUMBER = Input.IDNUMBER;
+                user.Rank = Input.Rank;
+                user.Majer = Input.Majer;
+                user.Office = Input.Office;
+                user.ImageUrl = filePath;
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

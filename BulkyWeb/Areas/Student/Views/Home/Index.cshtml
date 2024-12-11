@@ -1,8 +1,214 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<!doctype html>
+<html lang="en">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="dist/css/vendor/bootstrap.min.css">
+
+    <link rel="stylesheet" href="dist/css/vendor/slick.css">
+    <link rel="stylesheet" href="dist/css/vendor/slick-theme.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <link rel="stylesheet" href="dist/css/main.css">
+
+    <title>Appointment Booking</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header">
+                <H1>Appointment Booking</H1>
+                <div class="menu-btn">
+                    <div class="menu-btn-lines">
+                    </div>
+                </div>
+
+                <div class="main-menu d-none d-lg-flex">
+                    <ul class="main-menu-items list-unstyled">
+                        <li><a class="main-menu-item active-item" asp-area="Student" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="Docter" asp-controller="BookPage" asp-action="BookPage" class="main-menu-item">Book Page</a></li>
+                        <li><a href="#" class="main-menu-item">To contact us</a></li>
+                        @if (User.IsInRole(SD.Role_Docter) || User.IsInRole(SD.Role_Student))
+                        {
+                            <li>
+                                <a class="main-menu-item" asp-area="Identity" asp-controller="Account" asp-action="Logout">Logout</a>
+                                <form class="form-inline" style="display=none;" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+                                </form>
+                            </li>
+                        }
+                        @*                         @if (!User.IsInRole(SD.Role_Admin) || !User.IsInRole(SD.Role_Student))
+                        {
+                        <li>
+                        <a class="main-menu-item" asp-area="Identity" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                        } *@
+                        @if (!User.IsInRole(SD.Role_Admin) || !User.IsInRole(SD.Role_Student))
+                        {
+                            <li>
+                                <a class="main-menu-item" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <form action="search.html">
+                        <div class="header-searchbar">
+                            <input type="text" placeholder="Search here...">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="banner"
+             style="background-color: #F5F5F5; background-image: url(dist/images/%D8%AE%D9%84%D9%81%D9%8A%D8%A93.webp); background-repeat: no-repeat; background-size:1600px 900px">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="banner-slider">
+
+                        <div class="banner-content">
+                            <div class="banner-content-main">
+                                <h4 class="heading">IT department</h4>
+                                <span class="fs-6 has-line">Computer Information Systems</span>
+                                <br><br>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="blog-item blog-item-sm">
+                                        <div class="blog-item-image">
+                                            <img src="dist/images/sm-01.png" alt="Image" width="900px" height="200px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <a href="cis.html" class="btn btn-default">To book a meeting with the professors of this department,click here. </a>
+                            </div>
+                        </div>
+
+                        <div class="banner-content">
+                            <div class="banner-content-main">
+                                <h4 class="heading">IT department</h4>
+                                <span class="fs-6 has-line">Computer Science</span>
+                                <br><br>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="blog-item blog-item-sm">
+                                        <div class="blog-item-image">
+                                            <img src="dist/images/computer-science-word-cloud-un3dcev66vk4nds0.jpg" alt="Image" width="900px" height="200px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <a href="cs.html" class="btn btn-default">To book a meeting with the professors of this department,click here.</a>
+                            </div>
+                        </div>
+
+
+                        <div class="banner-content">
+                            <div class="banner-content-main">
+                                <h4 class="heading">IT department</h4>
+                                <span class="fs-6 has-line">Software Engineering</span>
+                                <br><br>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="blog-item blog-item-sm">
+                                        <div class="blog-item-image">
+                                            <img src="dist/images/sm-03.png" alt="Image" width="900px" height="200px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <a href="se.html" class="btn btn-default">To book a meeting with the professors of this department,click here.</a>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <!--  <div class="banner-content">
+                            <div class="banner-content-main">
+                               <h4 class="heading">IT department</h4>
+                                <span class="fs-6 has-line">Artificial Intelligence</span>
+                                <br> <br>
+
+                                 <div class="col-lg-4 col-md-6">
+                                 <div class="blog-item blog-item-sm">
+                                <div class="blog-item-image">
+                                <img src="dist/images/sm-06.png" alt="Image" width="900px" height="200px">
+                                </div>
+                                </div>
+                                </div>
+                                <br>
+                                <a href="ai.html" class="btn btn-default">To book a meeting with the professors of this department,click here.</a>
+                                </div>
+                                </div>
+
+
+                          <div class="banner-content">
+                            <div class="banner-content-main">
+                                <h4 class="heading">IT department</h4>
+                               <span class="fs-6 has-line">Cyber Security</span>
+                                <br> <br>
+                                 <div class="col-lg-4 col-md-6">
+                                 <div class="blog-item blog-item-sm">
+                                <div class="blog-item-image">
+                                 <img src="dist/images/sm-05.jpg" alt="Image" width="900px" height="200px">
+                                </div>
+                                </div>
+                                </div>
+                                  <br>
+                                <a href="cyber.html" class="btn btn-default">To book a meeting with the professors of this department,click here.</a>
+                                </div>
+                                </div>-->
+
+
+                        <div class="banner-content">
+                            <div class="banner-content-main">
+                                <h4 class="heading">IT department</h4>
+                                <span class="fs-6 has-line">Business Information Technology</span>
+                                <br><br>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="blog-item blog-item-sm">
+                                        <div class="blog-item-image">
+                                            <img src="dist/images/images.png" alt="Image" width="900px" height="200px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <a href="bit.html" class="btn btn-default">To book a meeting with the professors of this department,click here.</a>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="dist/js/jquery-3.6.0.min.js"></script>
+
+
+    <script src="dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="dist/js/menu.js"></script>
+
+    <script src="dist/js/slick.min.js"></script>
+
+    <script src="dist/js/main.js"></script>
+</body>
+
+</html>

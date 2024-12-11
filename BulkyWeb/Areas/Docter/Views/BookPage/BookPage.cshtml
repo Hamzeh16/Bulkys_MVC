@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking To Meet</title>
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/styler.css" />
+    <link rel="stylesheet" href="~/css/navbar.css" />
+    <link rel="stylesheet" href="~/css/footer.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <header id="NAVBAR"></header>
+    <div id="style_container">
+        <div class="styler_header">Pick Your Date And Time To Meet</div>
+        <form id="time_picker" action="book" method="post">
+            <input class="inputz" name="date" id="date" type="date" required />
+            <br />
+            <select class="inputz" name="hourOption" id="time" name="option" required>
+                <option value="" disabled selected>Select Your Time </option>
+                <option value="08-09">08:00 AM to 08:10 AM</option>
+                <option value="09-10">08:10 AM to 08:20 AM</option>
+                <option value="10-11">08:20 AM to 08:30 AM</option>
+                <option value="11-12">08:30 AM to 08:40 AM</option>
+                <option value="12-13">08:40 AM to 08:50 AM</option>
+                <option value="14-15">08:50 AM to 09:00 AM</option>
+
+                <option value="08-09">09:00 AM to 09:10 AM</option>
+                <option value="09-10">09:10 AM to 09:20 AM</option>
+                <option value="10-11">09:20 AM to 09:30 AM</option>
+                <option value="11-12">09:30 AM to 09:40 AM</option>
+                <option value="12-13">09:40 AM to 09:50 AM</option>
+                <option value="14-15">09:50 AM to 10:00 AM</option>
+
+
+
+                <option value="08-09">10:00 AM to 10:10 AM</option>
+                <option value="09-10">10:10 AM to 10:20 AM</option>
+                <option value="10-11">10:20 AM to 10:30 AM</option>
+                <option value="11-12">10:30 AM to 10:40 AM</option>
+                <option value="12-13">10:40 AM to 10:50 AM</option>
+                <option value="14-15">10:50 AM to 11:00 AM</option>
+
+
+                <option value="08-09">11:00 AM to 11:10 AM</option>
+                <option value="09-10">11:10 AM to 11:20 AM</option>
+                <option value="10-11">11:20 AM to 11:30 AM</option>
+                <option value="11-12">11:30 AM to 11:40 AM</option>
+                <option value="12-13">11:40 AM to 11:50 AM</option>
+                <option value="14-15">11:50 AM to 12:00 PM</option>
+
+
+
+                <option value="08-09">12:00 PM to 12:10 PM</option>
+                <option value="09-10">12:10 PM to 12:20 PM</option>
+                <option value="10-11">12:20 PM to 12:30 PM</option>
+                <option value="11-12">12:30 PM to 12:40 PM</option>
+                <option value="12-13">12:40 PM to 12:50 PM</option>
+                <option value="14-15">12:50 PM to 01:00 PM</option>
+
+
+
+                <option value="08-09">01:00 PM to 01:10 PM</option>
+                <option value="09-10">01:10 PM to 01:20 PM</option>
+                <option value="10-11">01:20 PM to 01:30 PM</option>
+                <option value="11-12">01:30 PM to 01:40 PM</option>
+                <option value="12-13">01:40 PM to 01:50 PM</option>
+                <option value="14-15">01:50 PM to 02:00 PM</option>
+
+
+
+                <option value="08-09">02:00 PM to 02:10 PM</option>
+                <option value="09-10">02:10 PM to 02:20 PM</option>
+                <option value="10-11">02:20 PM to 02:30 PM</option>
+                <option value="11-12">02:30 PM to 02:40 PM</option>
+                <option value="12-13">02:40 PM to 02:50 PM</option>
+                <option value="14-15">02:50 PM to 03:00 PM</option>
+
+
+            </select>
+            <br />
+            <input class="inputz" id="time_btn" type="submit" value="BOOK" />
+        </form>
+
+        <div class="styler_header"></div>
+        <div id="styler_grid">
+            <form id="time_pickerr" action="">
+                <!--   <input class="inputzz" id="time_btn" type="submit" value="View The Official Page Of Dr" />-->
+
+                <button id="time_btn"><a href="#">View The Official Page Of Dr</a></button>
+
+            </form>
+
+            <form id="time_pickerr" action="">
+                <!--   <input class="inputzz" id="time_btn" type="submit" value="View The Official Page Of Dr" />-->
+
+                <button id="time_btn">
+                    <a href="https://teams.microsoft.com/l/profile/{معرف المستخدم}/{رمز التعريف الفريد}">
+                        Contact Dr On The Teams
+                    </a>
+                </button>
+
+            </form>
+            <form id="time_pickerr" action="">
+                <!--   <input class="inputzz" id="time_btn" type="submit" value="View The Official Page Of Dr" />-->
+
+                <button id="time_btn"><a href="mailto:motaz@hu.edu.jo.com">Contact The Dr Via Email</a></button>
+
+            </form>
+
+            <!-- <form id="time_pickerr" action="file:///C:/Users/Toshiba/OneDrive/Desktop/proj%20test2/html/feedbackForm.html">
+                    <input class="inputzzz" id="time_btn" type="submit" value="Feedback" />
+            </form >-->
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10) month = "0" + month.toString();
+        if (day < 10) day = "0" + day.toString();
+        var maxDate = year + "-" + month + "-" + day;
+        $("#date").attr("min", maxDate);
+    });
+
+    var btn = document.getElementById('time_btn');
+
+    btn.addEventListener('click', () => {
+        alert('Your reservation has been completed successfully');
+    });
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>
+<script type="module" src="~/js/styler.js"></script>

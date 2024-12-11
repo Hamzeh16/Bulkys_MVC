@@ -52,7 +52,7 @@ namespace BulkyBookDataAccess.Migrations
 
                     b.HasKey("RequestId");
 
-                    b.ToTable("AffiliatePostRequests");
+                    b.ToTable("AffiliatePostRequests", (string)null);
                 });
 
             modelBuilder.Entity("BulkyBookModels.Model.Product", b =>
@@ -92,7 +92,7 @@ namespace BulkyBookDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("BulkyBookModels.Models.Category", b =>
@@ -119,7 +119,7 @@ namespace BulkyBookDataAccess.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

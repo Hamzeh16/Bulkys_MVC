@@ -1,6 +1,7 @@
 ﻿using BulkyBookDataAccess.Data;
 using BulkyBookDataAccess.Repositray;
 using BulkyBookDataAccess.Repositray.IRepositray;
+using BulkyBookModels.Model;
 using BulkyBookUtility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 //builder.Services.ConfigureApplicationCookie(options => {
 //    options.LoginPath = $"/Identity/Account/Login";
 //    options.LogoutPath = $"/Identity/Account/Logout";

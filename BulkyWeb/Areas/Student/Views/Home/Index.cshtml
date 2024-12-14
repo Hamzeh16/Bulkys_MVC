@@ -18,7 +18,6 @@
 </head>
 
 <body>
-
     <header>
         <div class="container">
             <div class="header">
@@ -33,21 +32,20 @@
                         <li><a class="main-menu-item active-item" asp-area="Student" asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a asp-area="Docter" asp-controller="BookPage" asp-action="BookPage" class="main-menu-item">Book Page</a></li>
                         <li><a href="#" class="main-menu-item">To contact us</a></li>
-                        @if (User.IsInRole(SD.Role_Docter) || User.IsInRole(SD.Role_Student))
+                        @if (User.IsInRole(SD.Role_Docter) || User.IsInRole(SD.Role_Student) || User.IsInRole(SD.Role_Admin))
                         {
                             <li>
-                                <a class="main-menu-item" asp-area="Identity" asp-controller="Account" asp-action="Logout">Logout</a>
-                                <form class="form-inline" style="display=none;" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                                    <button type="submit" class="nav-link btn btn-link text-dark">Click here to Logout</button>
+                                <a class="main-menu-item"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Logout"
+                                   asp-route-returnUrl="@Url.Page("/", new { area = "" })"
+                                   onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                                    Logout
+                                </a>
+                                <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" style="display:none;">
                                 </form>
                             </li>
                         }
-                        @*                         @if (!User.IsInRole(SD.Role_Admin) || !User.IsInRole(SD.Role_Student))
-                        {
-                        <li>
-                        <a class="main-menu-item" asp-area="Identity" asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
-                        } *@
                         @if (!User.IsInRole(SD.Role_Admin) || !User.IsInRole(SD.Role_Student))
                         {
                             <li>
@@ -91,7 +89,7 @@
                                     </div>
                                 </div>
                                 <br>
-                                <a href="cis.html" class="btn btn-default">To book a meeting with the professors of this department,click here. </a>
+                                <a asp-area="Student" asp-controller="DrPage" asp-action="cis" class="btn btn-default">To book a meeting with the professors of this department,click here. </a>
                             </div>
                         </div>
 
@@ -112,7 +110,6 @@
                             </div>
                         </div>
 
-
                         <div class="banner-content">
                             <div class="banner-content-main">
                                 <h4 class="heading">IT department</h4>
@@ -130,46 +127,41 @@
                             </div>
                         </div>
 
-
-
-
-
-                        <!--  <div class="banner-content">
+                        <  <div class="banner-content">
                             <div class="banner-content-main">
-                               <h4 class="heading">IT department</h4>
+                                <h4 class="heading">IT department</h4>
                                 <span class="fs-6 has-line">Artificial Intelligence</span>
                                 <br> <br>
 
-                                 <div class="col-lg-4 col-md-6">
-                                 <div class="blog-item blog-item-sm">
-                                <div class="blog-item-image">
-                                <img src="dist/images/sm-06.png" alt="Image" width="900px" height="200px">
-                                </div>
-                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="blog-item blog-item-sm">
+                                        <div class="blog-item-image">
+                                            <img src="dist/images/sm-06.png" alt="Image" width="900px" height="200px">
+                                        </div>
+                                    </div>
                                 </div>
                                 <br>
                                 <a href="ai.html" class="btn btn-default">To book a meeting with the professors of this department,click here.</a>
-                                </div>
-                                </div>
+                            </div>
+                        </div>
 
 
-                          <div class="banner-content">
+                        <div class="banner-content">
                             <div class="banner-content-main">
                                 <h4 class="heading">IT department</h4>
-                               <span class="fs-6 has-line">Cyber Security</span>
+                                <span class="fs-6 has-line">Cyber Security</span>
                                 <br> <br>
-                                 <div class="col-lg-4 col-md-6">
-                                 <div class="blog-item blog-item-sm">
-                                <div class="blog-item-image">
-                                 <img src="dist/images/sm-05.jpg" alt="Image" width="900px" height="200px">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="blog-item blog-item-sm">
+                                        <div class="blog-item-image">
+                                            <img src="dist/images/sm-05.jpg" alt="Image" width="900px" height="200px">
+                                        </div>
+                                    </div>
                                 </div>
-                                </div>
-                                </div>
-                                  <br>
+                                <br>
                                 <a href="cyber.html" class="btn btn-default">To book a meeting with the professors of this department,click here.</a>
-                                </div>
-                                </div>-->
-
+                            </div>
+                        </div>
 
                         <div class="banner-content">
                             <div class="banner-content-main">
@@ -187,28 +179,21 @@
                                 <a href="bit.html" class="btn btn-default">To book a meeting with the professors of this department,click here.</a>
                             </div>
                         </div>
-
-
-
-
-
-
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <script src="dist/js/jquery-3.6.0.min.js"></script>
 
+    <script src="~/js/jquery-3.6.0.min.js"></script>
 
-    <script src="dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
 
-    <script src="dist/js/menu.js"></script>
+    <script src="~/js/menu.js"></script>
 
-    <script src="dist/js/slick.min.js"></script>
+    <script src="~/js/slick.min.js"></script>
 
-    <script src="dist/js/main.js"></script>
+    <script src="~/js/main.js"></script>
 </body>
 
 </html>

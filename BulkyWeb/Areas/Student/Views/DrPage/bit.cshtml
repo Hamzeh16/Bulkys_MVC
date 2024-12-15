@@ -1,5 +1,40 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<ApplicationUser>
+
+<link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
+<link rel="stylesheet" href="~/css/footer.css" />
+<link rel="stylesheet" href="~/css/navbar.css" />
+<link rel="stylesheet" href="~/css/drpaj.css" />
+
+<nav>
+    <ul>
+        <li class="name">Business Information Technology</li>
+    </ul>
+</nav>
+<header id="NAVBAR"></header>
+
+<div id="main-services-body">
+    <div class="general-container-service-page">
+        @foreach (var obj in Model.Where(x => x.Majer == "Business Information Technology"))
+        {
+            <div class="card-service-page">
+                <a href="styler.html"></a>
+                <img class="service-card-images"
+                     src="@obj.ImageUrl" />
+                <div class="card-overlay">
+                    <div class="title">
+                        <h3>Dr.@obj.Name</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            Name :@obj.Name<br><br>
+                            Rank :@obj.Rank<br><br>
+                            Office :@obj.Office<br><br>
+                            E-Mail :@obj.Email<br><br>
+                            Major :@obj.Majer<br><br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

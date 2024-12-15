@@ -6,6 +6,7 @@ using BulkyBookUtility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,14 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+
+// Add static file middleware for the uploads folder
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(uploadsFolder),
+    RequestPath = "/uploads" // URL path prefix
+});
 
 //builder.Services.AddCors(options =>
 //{

@@ -24,6 +24,7 @@ namespace BulkyWeb.Areas.Student.Controllers
                         Id = u.Id,
                         Name = u.Name ?? "Unknown",           // Provide default value for null Name
                         Majer = u.Majer ?? "Unknown",         // Provide default value for null Majer
+                        Email = u.Email ?? "Unknown",
                         Rank = u.Rank ?? "Unranked",          // Provide default value for null Rank
                         Office = u.Office ?? "Not Assigned",  // Provide default value for null Office
                         ImageUrl = u.ImageUrl ?? "/images/default.png" // Provide default image URL for null ImageUrl
@@ -40,6 +41,7 @@ namespace BulkyWeb.Areas.Student.Controllers
                         Id = u.Id,
                         Name = u.Name ?? "Unknown",           // Provide default value for null Name
                         Majer = u.Majer ?? "Unknown",         // Provide default value for null Majer
+                        Email = u.Email ?? "Unknown",
                         Rank = u.Rank ?? "Unranked",          // Provide default value for null Rank
                         Office = u.Office ?? "Not Assigned",  // Provide default value for null Office
                         ImageUrl = u.ImageUrl ?? "/images/default.png" // Provide default image URL for null ImageUrl
@@ -56,6 +58,7 @@ namespace BulkyWeb.Areas.Student.Controllers
                         Id = u.Id,
                         Name = u.Name ?? "Unknown",           // Provide default value for null Name
                         Majer = u.Majer ?? "Unknown",         // Provide default value for null Majer
+                        Email = u.Email ?? "Unknown",
                         Rank = u.Rank ?? "Unranked",          // Provide default value for null Rank
                         Office = u.Office ?? "Not Assigned",  // Provide default value for null Office
                         ImageUrl = u.ImageUrl ?? "/images/default.png" // Provide default image URL for null ImageUrl
@@ -72,6 +75,7 @@ namespace BulkyWeb.Areas.Student.Controllers
                         Id = u.Id,
                         Name = u.Name ?? "Unknown",           // Provide default value for null Name
                         Majer = u.Majer ?? "Unknown",         // Provide default value for null Majer
+                        Email = u.Email ?? "Unknown",
                         Rank = u.Rank ?? "Unranked",          // Provide default value for null Rank
                         Office = u.Office ?? "Not Assigned",  // Provide default value for null Office
                         ImageUrl = u.ImageUrl ?? "/images/default.png" // Provide default image URL for null ImageUrl
@@ -88,6 +92,7 @@ namespace BulkyWeb.Areas.Student.Controllers
                         Id = u.Id,
                         Name = u.Name ?? "Unknown",           // Provide default value for null Name
                         Majer = u.Majer ?? "Unknown",         // Provide default value for null Majer
+                        Email = u.Email ?? "Unknown",
                         Rank = u.Rank ?? "Unranked",          // Provide default value for null Rank
                         Office = u.Office ?? "Not Assigned",  // Provide default value for null Office
                         ImageUrl = u.ImageUrl ?? "/images/default.png" // Provide default image URL for null ImageUrl
@@ -104,6 +109,7 @@ namespace BulkyWeb.Areas.Student.Controllers
                         Id = u.Id,
                         Name = u.Name ?? "Unknown",           // Provide default value for null Name
                         Majer = u.Majer ?? "Unknown",         // Provide default value for null Majer
+                        Email = u.Email ?? "Unknown",
                         Rank = u.Rank ?? "Unranked",          // Provide default value for null Rank
                         Office = u.Office ?? "Not Assigned",  // Provide default value for null Office
                         ImageUrl = u.ImageUrl ?? "/images/default.png" // Provide default image URL for null ImageUrl

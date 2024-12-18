@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BulkyBookModels.Model
 {
     public class BookingPagecs
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string? day { get; set; }
-        public string? time { get; set; }   
-        public DateTime? date{ get; set; }  
-
+        public string? time { get; set; }
+        public DateTime? date{ get; set; }
+        public string? TypeUser { get; set; }
+        public string? User_Email  { get; set; }
+        public string? User_Name  { get; set; }
+        public int? IDNumber  { get; set; }
+        public bool? Requst {  get; set; }
     }
 }

@@ -1,8 +1,8 @@
-﻿using BulkyBookDataAccess.Repositray;
-using BulkyBookDataAccess.Repositray.IRepositray;
+﻿using BulkyBookDataAccess.Repositray.IRepositray;
 using BulkyBookModels.Model;
-using BulkyBookModels.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BulkyWeb.Areas.Docter.Controllers
 {
@@ -10,76 +10,60 @@ namespace BulkyWeb.Areas.Docter.Controllers
     public class BookPageController : Controller
     {
         private readonly IUnitOfWorkRepositray _UnitOfWorkRepositra;
-        public BookPageController(IUnitOfWorkRepositray UnitOfWorkRepositra)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public BookPageController(IUnitOfWorkRepositray UnitOfWorkRepositra, UserManager<ApplicationUser> userManager)
         {
             _UnitOfWorkRepositra = UnitOfWorkRepositra;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
             List<BookingPagecs> objBookingPageList = _UnitOfWorkRepositra.BookingPages.GetAll().ToList();
             return View(objBookingPageList);
         }
-        public IActionResult Create()
-        {
-            return View();
-        }
+
         [HttpPost]
-        public IActionResult Create(BookingPagecs BookingPages)
+        public IActionResult BookPage(BookingPagecs BookingPages)
         {
-            _UnitOfWorkRepositra.BookingPages.Add(BookingPages);
+            List<BookingPagecs> bookingPageData = _UnitOfWorkRepositra.BookingPages.GetAll().ToList();
+
+            var Data = bookingPageData.Where(x => x.User_Email == BookingPages.User_Email).FirstOrDefault();
+
+            if (Data == null)
+            {
+                _UnitOfWorkRepositra.BookingPages.Add(BookingPages);
+            }
+            else
+            {
+                if (Data.day != null)
+                    Data.day = BookingPages.day;
+                if (Data.day != null)
+                    Data.date = BookingPages.date;
+                if (Data.day != null)
+                    Data.time = BookingPages.time;
+
+                _UnitOfWorkRepositra.BookingPages.Update(Data);
+                return View(Data);
+            }
+
             _UnitOfWorkRepositra.Save();
             TempData["success"] = "BookingPages Created successfully";
-            return RedirectToAction("Index");
-        }
-        public IActionResult Edit(int? ID)
-        {
-            if (ID == 0 || ID == null)
-            {
-                return NotFound();
-            }
-            BookingPagecs? BookingPages = _UnitOfWorkRepositra.BookingPages.Get(c => c.Id == ID);
             return View(BookingPages);
         }
-        [HttpPost]
-        public IActionResult Edit(BookingPagecs BookingPages)
-        {
-            if (ModelState.IsValid)
-            {
-                _UnitOfWorkRepositra.BookingPages.Update(BookingPages);
-                TempData["success"] = "Category Updated successfully";
 
-                _UnitOfWorkRepositra.Save();
-            }
-            return RedirectToAction("Index");
-        }
-        public IActionResult Delete(int? ID)
+        public async Task<IActionResult> BookPage()
         {
-            if (ID == 0 || ID == null)
+            var userEmail = HttpContext.Session.GetString("UserEmail");
+            var users = await _userManager.Users
+            .Select(u => new BookingPagecs
             {
-                return NotFound();
-            }
-            BookingPagecs? BookingPages = _UnitOfWorkRepositra.BookingPages.Get(c => c.Id == ID);
-            return View(BookingPages);
-        }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePost(int? ID)
-        {
-            BookingPagecs? BookingPages = _UnitOfWorkRepositra.BookingPages.Get(c => c.Id == ID);
-            if (BookingPages == null)
-            {
-                return NotFound();
-            }
-            if (ModelState.IsValid)
-            {
-                _UnitOfWorkRepositra.BookingPages.Remove(BookingPages);
-                _UnitOfWorkRepositra.Save();
-                TempData["success"] = "Category Deleted successfully";
-            }
-            return RedirectToAction("Index");
-        }
-        public IActionResult BookPage()
-        {
-            return View();
+                User_Email = u.Email ?? "Unknown",           // Provide default value for null Name
+                User_Name = u.Name ?? "Unknown",         // Provide default value for null Majer
+                IDNumber = u.IDNUMBER,         // Provide default value for null Majer
+            }).ToListAsync();
+            var user = users.Where(x => x.User_Email == userEmail).FirstOrDefault();
+            return View(user);
         }
     }
 }

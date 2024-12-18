@@ -120,7 +120,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             public int IDNUMBER { get; set; }
         }
 
-        
+
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (!_roleManager.RoleExistsAsync(SD.Role_Student).GetAwaiter().GetResult())
@@ -149,26 +149,31 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
-
-                // Ensure the uploads folder exists
-                if (!Directory.Exists(uploadsFolder))
-                {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
-
-                // Save the file to the uploads folder
-                var fileName = Input.ImageUrl.FileName;
-                var filePath = Path.Combine(uploadsFolder, fileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await Input.ImageUrl.CopyToAsync(stream);
-                }
-
-                // Generate the URL for the saved file
-                var imageUrl = Path.Combine("/uploads", fileName).Replace("\\", "/");
-
                 var user = CreateUser();
+
+                if (Input.Role == "Docter")
+                {
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
+
+                    // Ensure the uploads folder exists
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    // Save the file to the uploads folder
+                    var fileName = Input.ImageUrl.FileName;
+                    var filePath = Path.Combine(uploadsFolder, fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await Input.ImageUrl.CopyToAsync(stream);
+                    }
+
+                    // Generate the URL for the saved file
+                    var imageUrl = Path.Combine("/uploads", fileName).Replace("\\", "/");
+
+                    user.ImageUrl = imageUrl;
+                }
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -176,9 +181,9 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 user.Email = Input.Email;
                 user.IDNUMBER = Input.IDNUMBER;
                 user.Rank = Input.Rank;
+                user.TypeUser = Input.Role;
                 user.Majer = Input.Majer;
                 user.Office = Input.Office;
-                user.ImageUrl = imageUrl;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

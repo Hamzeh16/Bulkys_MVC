@@ -31,6 +31,7 @@
                     <ul class="main-menu-items list-unstyled">
                         <li><a class="main-menu-item active-item" asp-area="Student" asp-controller="Home" asp-action="Index">Home</a></li>
                         <li><a asp-area="Docter" asp-controller="BookPage" asp-action="BookPage" class="main-menu-item">Book Page</a></li>
+                        <li><a asp-area="Docter" asp-controller="PendingbookRequests" asp-action="PendingbookRequests" class="main-menu-item">Book Student</a></li>
                         <li><a href="#" class="main-menu-item">To contact us</a></li>
                         @if (User.IsInRole(SD.Role_Docter) || User.IsInRole(SD.Role_Student) || User.IsInRole(SD.Role_Admin))
                         {

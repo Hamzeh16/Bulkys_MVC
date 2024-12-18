@@ -32,6 +32,14 @@ builder.Services.ConfigureApplicationCookie(option =>
 builder.Services.AddScoped<IUnitOfWorkRepositray, UnitOfWorkRepositray>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
+// إعداد الجلسة
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);  // تحديد مدة صلاحية الجلسة
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;  // لجعل الكوكيز أساسي
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -65,6 +73,7 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
 app.UseAuthentication();

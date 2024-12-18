@@ -19,5 +19,7 @@ namespace BulkyBookModels.Model
         public string? Majer { get; set; }
 
         public string? ImageUrl { get; set; }
+
+        public string? TypeUser { get; set; }
     }
 }

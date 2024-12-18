@@ -102,3 +102,22 @@ form .text h3 a{
 form .text h3 a:hover{
   text-decoration: underline;
 }
+
+/* General container for fields */
+.input-container {
+    display: flex;
+    justify-content: space-between; /* Align fields with space between */
+    align-items: center; /* Align vertically */
+    gap: 15px; /* Add space between the fields */
+}
+
+    /* Individual input styles */
+    .input-container input,
+    .input-container select,
+    .input-container button {
+        width: 100%; /* Make inputs consistent */
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }

@@ -4,6 +4,7 @@ using BulkyBookDataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BulkyBookDataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241218160336_EditAppBooking")]
+    partial class EditAppBooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,25 +60,13 @@ namespace BulkyBookDataAccess.Migrations
 
             modelBuilder.Entity("BulkyBookModels.Model.BookingPagecs", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int?>("IDNumber")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("Requst")
-                        .HasColumnType("bit");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("TypeUser")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("User_Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("User_Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("date")
@@ -84,10 +75,13 @@ namespace BulkyBookDataAccess.Migrations
                     b.Property<string>("day")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("time")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("BookingPages");
                 });

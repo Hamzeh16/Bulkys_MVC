@@ -1,4 +1,5 @@
-﻿using BulkyBookDataAccess.Repositray.IRepositray;
+﻿using BulkyBookDataAccess.Repositray;
+using BulkyBookDataAccess.Repositray.IRepositray;
 using BulkyBookModels.Model;
 using BulkyBookModels.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -23,11 +24,11 @@ namespace BulkyWeb.Areas.Docter.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Category category)
+        public IActionResult Create(BookingPagecs BookingPages)
         {
-            _UnitOfWorkRepositra.Category.Add(category);
+            _UnitOfWorkRepositra.BookingPages.Add(BookingPages);
             _UnitOfWorkRepositra.Save();
-            TempData["success"] = "Category Created successfully";
+            TempData["success"] = "BookingPages Created successfully";
             return RedirectToAction("Index");
         }
         public IActionResult Edit(int? ID)
@@ -36,15 +37,15 @@ namespace BulkyWeb.Areas.Docter.Controllers
             {
                 return NotFound();
             }
-            Category? category = _UnitOfWorkRepositra.Category.Get(c => c.ID == ID);
-            return View(category);
+            BookingPagecs? BookingPages = _UnitOfWorkRepositra.BookingPages.Get(c => c.Id == ID);
+            return View(BookingPages);
         }
         [HttpPost]
-        public IActionResult Edit(Category category)
+        public IActionResult Edit(BookingPagecs BookingPages)
         {
             if (ModelState.IsValid)
             {
-                _UnitOfWorkRepositra.Category.Update(category);
+                _UnitOfWorkRepositra.BookingPages.Update(BookingPages);
                 TempData["success"] = "Category Updated successfully";
 
                 _UnitOfWorkRepositra.Save();
@@ -57,20 +58,20 @@ namespace BulkyWeb.Areas.Docter.Controllers
             {
                 return NotFound();
             }
-            Category? category = _UnitOfWorkRepositra.Category.Get(c => c.ID == ID);
-            return View(category);
+            BookingPagecs? BookingPages = _UnitOfWorkRepositra.BookingPages.Get(c => c.Id == ID);
+            return View(BookingPages);
         }
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? ID)
         {
-            Category? category = _UnitOfWorkRepositra.Category.Get(c => c.ID == ID);
-            if (category == null)
+            BookingPagecs? BookingPages = _UnitOfWorkRepositra.BookingPages.Get(c => c.Id == ID);
+            if (BookingPages == null)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                _UnitOfWorkRepositra.Category.Remove(category);
+                _UnitOfWorkRepositra.BookingPages.Remove(BookingPages);
                 _UnitOfWorkRepositra.Save();
                 TempData["success"] = "Category Deleted successfully";
             }

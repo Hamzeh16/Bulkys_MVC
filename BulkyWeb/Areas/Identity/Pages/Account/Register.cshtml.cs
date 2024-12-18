@@ -149,23 +149,24 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                // تحديد المجلد الذي سيتم تخزين الملفات فيه
                 var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
 
-                // التأكد من أن المجلد موجود
+                // Ensure the uploads folder exists
                 if (!Directory.Exists(uploadsFolder))
                 {
                     Directory.CreateDirectory(uploadsFolder);
                 }
 
-                // تحديد المسار الذي سيتم تخزين السيرة الذاتية فيه
-                var filePath = Path.Combine(uploadsFolder, Input.ImageUrl.FileName);
-
-                // تخزين الملف في المجلد
+                // Save the file to the uploads folder
+                var fileName = Input.ImageUrl.FileName;
+                var filePath = Path.Combine(uploadsFolder, fileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await Input.ImageUrl.CopyToAsync(stream);  // نسخ محتويات الملف إلى المجلد
+                    await Input.ImageUrl.CopyToAsync(stream);
                 }
+
+                // Generate the URL for the saved file
+                var imageUrl = Path.Combine("/uploads", fileName).Replace("\\", "/");
 
                 var user = CreateUser();
 
@@ -177,7 +178,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 user.Rank = Input.Rank;
                 user.Majer = Input.Majer;
                 user.Office = Input.Office;
-                user.ImageUrl = filePath;
+                user.ImageUrl = imageUrl;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

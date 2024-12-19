@@ -22,7 +22,8 @@
             @foreach (var obj in Model.Where(x => x.Majer == "Computer Information Systems"))
             {
                 <div class="card-service-page">
-                    <a asp-area="Docter" asp-controller="BookPage" asp-action="BookPage"></a>
+                    <input type="hidden" name="ID" value="@obj.Email" />
+                    <a asp-area="Docter" asp-controller="BookPage" asp-action="BookPage" asp-route-Email="@obj.Email"></a>
                     <img class="service-card-images"
                          src="@obj.ImageUrl" />
                     <div class="card-overlay">

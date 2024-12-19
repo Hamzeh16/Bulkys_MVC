@@ -30,7 +30,7 @@ namespace BulkyWeb.Areas.Docter.Controllers
 
             var Data = bookingPageData.Where(x => x.User_Email == BookingPages.User_Email).FirstOrDefault();
 
-            if (Data == null)
+            if ((!(Data!.TypeUser == "Docter")) || Data == null)
             {
                 _UnitOfWorkRepositra.BookingPages.Add(BookingPages);
             }
@@ -52,7 +52,7 @@ namespace BulkyWeb.Areas.Docter.Controllers
             return View(BookingPages);
         }
 
-        public async Task<IActionResult> BookPage()
+        public async Task<IActionResult> BookPage(string Email)
         {
             var userEmail = HttpContext.Session.GetString("UserEmail");
             var users = await _userManager.Users
@@ -61,8 +61,19 @@ namespace BulkyWeb.Areas.Docter.Controllers
                 User_Email = u.Email ?? "Unknown",           // Provide default value for null Name
                 User_Name = u.Name ?? "Unknown",         // Provide default value for null Majer
                 IDNumber = u.IDNUMBER,         // Provide default value for null Majer
+                TypeUser = u.TypeUser,
             }).ToListAsync();
+
             var user = users.Where(x => x.User_Email == userEmail).FirstOrDefault();
+            
+            if (Email != null)
+            {
+                List<BookingPagecs> bookings = _UnitOfWorkRepositra.BookingPages.GetAll().ToList();
+                var DataBook = bookings.Where(x => x.User_Email == Email).FirstOrDefault();
+                user!.day = DataBook!.day;
+                user!.date = DataBook!.date;
+                user!.User_Email = DataBook!.User_Email;
+            }
             return View(user);
         }
     }

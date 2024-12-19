@@ -17,8 +17,9 @@ namespace BulkyWeb.Areas.Docter.Controllers
         // Display pending post requests
         public IActionResult PendingbookRequests()
         {
+            var userEmail = HttpContext.Session.GetString("UserEmail"); // For Docter Just
             List<BookingPagecs> objCategoryList = _UnitOfWorkRepositra.BookingPages.GetAll().ToList();
-            //objCategoryList = objCategoryList.Where(x => x.Requst == null && x.TypeUser == "Student").ToList();
+            objCategoryList = objCategoryList.Where(x => x.Requst == null && x.TypeUser == "Student" && x.User_Email == userEmail).ToList();
             return View(objCategoryList);
         }
 
@@ -48,7 +49,7 @@ namespace BulkyWeb.Areas.Docter.Controllers
 
                 _UnitOfWorkRepositra.Save();
             }
-            return View(category);
+            return View();
         }
     }
 }

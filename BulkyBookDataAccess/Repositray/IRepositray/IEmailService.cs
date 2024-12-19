@@ -1,11 +1,11 @@
-﻿using BulkyBookModels.Model;
+﻿//using BulkyBookModels.Model;
 
-namespace BulkyBookDataAccess.Repositray.IRepositray
-{
-    public interface IEmailService
-    {
-      void SendEmail(Messsage message);
-    }
-}
+//namespace BulkyBookDataAccess.Repositray.IRepositray
+//{
+//    public interface IEmailService
+//    {
+//      void SendEmail(Messsage message);
+//    }
+//}
 
 

@@ -22,7 +22,7 @@
             @foreach (var obj in Model.Where(x => x.Majer == "Computer Information Systems"))
             {
                 <div class="card-service-page">
-                    <a href="styler.html"></a>
+                    <a asp-area="Docter" asp-controller="BookPage" asp-action="BookPage"></a>
                     <img class="service-card-images"
                          src="@obj.ImageUrl" />
                     <div class="card-overlay">

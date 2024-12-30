@@ -23,6 +23,7 @@
             <input class="inputz" asp-for="@Model.User_Email" name="User_Email" id="date" type="hidden" />
             <input class="inputz" asp-for="@Model.User_Name" name="User_Name" id="date" type="hidden" />
             <input class="inputz" asp-for="@Model.IDNumber" name="IDNumber" id="date" type="hidden" />
+            <input class="inputz" asp-for="@Model.TypeUser" name="TypeUser" id="date" type="hidden" />
 
             @if (Model.TypeUser == "Docter")
             {
@@ -91,7 +92,7 @@
                 <br />
                 <input class="inputz" readonly asp-for="@Model.date" name="date" id="date" type="date" required />
                 <br />
-                <select class="inputz" asp-for="@Model.time" name="time" id="time" required>
+                <select class="inputz" asp-for="@Model.time" name="time" id="time">
                     <option value="" disabled selected>Select Your Time </option>
                     <option value="08-09">08:00 AM to 08:10 AM</option>
                     <option value="09-10">08:10 AM to 08:20 AM</option>

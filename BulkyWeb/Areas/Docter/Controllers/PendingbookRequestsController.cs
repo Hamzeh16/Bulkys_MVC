@@ -49,7 +49,8 @@ namespace BulkyWeb.Areas.Docter.Controllers
 
                 _UnitOfWorkRepositra.Save();
             }
-            return View();
+            
+            return PendingbookRequests();
         }
     }
 }

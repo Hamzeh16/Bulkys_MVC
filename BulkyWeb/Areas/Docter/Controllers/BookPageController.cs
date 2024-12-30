@@ -30,7 +30,7 @@ namespace BulkyWeb.Areas.Docter.Controllers
 
             var Data = bookingPageData.Where(x => x.User_Email == BookingPages.User_Email).FirstOrDefault();
 
-            if ((!(Data!.TypeUser == "Docter")) || Data == null)
+            if (Data == null || (BookingPages.TypeUser == "Student"))
             {
                 _UnitOfWorkRepositra.BookingPages.Add(BookingPages);
             }
@@ -66,13 +66,28 @@ namespace BulkyWeb.Areas.Docter.Controllers
 
             var user = users.Where(x => x.User_Email == userEmail).FirstOrDefault();
             
+            
             if (Email != null)
             {
                 List<BookingPagecs> bookings = _UnitOfWorkRepositra.BookingPages.GetAll().ToList();
                 var DataBook = bookings.Where(x => x.User_Email == Email).FirstOrDefault();
-                user!.day = DataBook!.day;
-                user!.date = DataBook!.date;
-                user!.User_Email = DataBook!.User_Email;
+                if (DataBook != null)
+                {
+                    user!.day = DataBook.day;
+                    user!.date = DataBook.date;
+                    user!.User_Email = DataBook.User_Email;
+                }
+            }
+            else
+            {
+                List<BookingPagecs> bookings = _UnitOfWorkRepositra.BookingPages.GetAll().ToList();
+                var DataBook = bookings.Where(x => x.User_Email == user!.User_Email).FirstOrDefault();
+                if (DataBook != null)
+                {
+                    user!.day = DataBook.day;
+                    user!.date = DataBook.date;
+                    user!.User_Email = DataBook.User_Email;
+                }
             }
             return View(user);
         }

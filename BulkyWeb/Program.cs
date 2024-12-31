@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -31,6 +33,16 @@ builder.Services.ConfigureApplicationCookie(option =>
 });
 builder.Services.AddScoped<IUnitOfWorkRepositray, UnitOfWorkRepositray>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+// Sent Email
+var emailConfig = configuration.GetSection("EmailConfigration").Get<EmailConfigration>();
+builder.Services.AddSingleton(emailConfig);
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.SignIn.RequireConfirmedEmail = false;
+});
 
 // إعداد الجلسة
 builder.Services.AddSession(options =>

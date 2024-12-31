@@ -37,13 +37,13 @@
         </div>
         <div id="dynamicFields">
             <div class="input-box">
-                <input asp-for="Input.Majer" type="text" placeholder="Major" required>
+                <input asp-for="Input.Majer" type="text" placeholder="Major">
             </div>
             <div class="input-box">
-                <input asp-for="Input.Office" type="text" placeholder="Office" required>
+                <input asp-for="Input.Office" type="text" placeholder="Office">
             </div>
             <div class="input-box">
-                <input asp-for="Input.Rank" type="text" placeholder="Rank" required>
+                <input asp-for="Input.Rank" type="text" placeholder="Rank">
             </div>
             <div class="input-box">
                 <input asp-for="Input.ImageUrl" type="file" placeholder="Upload Image">
@@ -53,7 +53,7 @@
             <input type="Submit" value="Register Now">
         </div>
         <div class="text">
-            <h3>Already have an account? <a href="#">Login now</a></h3>
+            <h3>Already have an account? <a href="login.html">Login now</a></h3>
         </div>
     </form>
 </div>
@@ -69,7 +69,8 @@
             const selectedRole = roleDropdown.value;
 
             if (selectedRole === "Docter") {
-                dynamicFields.style.display = "grid"; // إظهار الحقول
+                dynamicFields.style.display = "flex";
+				                                       // إظهار الحقول
             } else {
                 dynamicFields.style.display = "none"; // إخفاء الحقول
             }

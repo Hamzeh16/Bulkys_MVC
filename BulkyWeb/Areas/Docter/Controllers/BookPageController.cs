@@ -44,6 +44,7 @@ namespace BulkyWeb.Areas.Docter.Controllers
                     Data.time = BookingPages.time;
 
                 _UnitOfWorkRepositra.BookingPages.Update(Data);
+                _UnitOfWorkRepositra.Save();
                 return View(Data);
             }
 

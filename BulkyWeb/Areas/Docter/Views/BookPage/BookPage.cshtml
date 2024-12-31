@@ -145,9 +145,16 @@
 
                 </select>
             }
-           
+
             <br />
-            <input class="inputz" id="time_btn" type="submit" value="BOOK" />
+            @if (Model.TypeUser == "Docter")
+            {
+                <input class="inputz" id="time_btn" type="submit" value="Confirm" />
+            }
+            @if (Model.TypeUser == "Student")
+            {
+                <input class="inputz" id="time_btn" type="submit" value="Book" />
+            }
         </form>
 
         <div class="styler_header"></div>

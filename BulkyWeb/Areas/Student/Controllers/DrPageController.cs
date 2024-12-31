@@ -1,4 +1,6 @@
 ﻿using BulkyBookModels.Model;
+using BulkyBookUtility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BulkyWeb.Areas.Student.Controllers
 {
     [Area("Student")]
+    [Authorize(Roles = $"{SD.Role_Student},{SD.Role_Docter}")]
     public class DrPageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

@@ -9,6 +9,8 @@ namespace BulkyBookDataAccess.Repositray
         public ICategoryRepositray Category {  get; set; }
         public IProductRepositray Product {  get; set; }
         public IBookingPage BookingPages { get; set; }
+        public FeedbackInterface Feedback { get; set; }
+
 
         private AppDbContext _db;
         public UnitOfWorkRepositray(AppDbContext db)
@@ -17,6 +19,7 @@ namespace BulkyBookDataAccess.Repositray
             Category = new CategoryRepository(_db);
             Product = new ProductRepositray(_db);
             BookingPages = new BookingPage(_db);
+            Feedback = new FeedbackRepositry(_db);
         }
         public void Save()
         {

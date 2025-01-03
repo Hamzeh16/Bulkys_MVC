@@ -23,7 +23,13 @@ namespace BulkyBookDataAccess.Data
         /// <summary>
         ///  Extend User
         /// </summary>
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }    
+        
+        /// <summary>
+        ///  Extend User
+        /// </summary>
+        public DbSet<Feedback> Feedbacks { get; set; }
+
         /// <summary>
         /// AffiliatePostRequest Table
         /// </summary>

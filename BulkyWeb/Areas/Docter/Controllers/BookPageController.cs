@@ -1,5 +1,6 @@
 ﻿using BulkyBookDataAccess.Repositray.IRepositray;
 using BulkyBookModels.Model;
+using BulkyBookModels.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,8 @@ namespace BulkyWeb.Areas.Docter.Controllers
                     Data.date = BookingPages.date;
                 if (Data.day != null)
                     Data.time = BookingPages.time;
+                if (Data.HoursOffice != null)
+                    Data.HoursOffice = BookingPages.HoursOffice;
 
                 _UnitOfWorkRepositra.BookingPages.Update(Data);
                 _UnitOfWorkRepositra.Save();
@@ -77,6 +80,7 @@ namespace BulkyWeb.Areas.Docter.Controllers
                     user!.day = DataBook.day;
                     user!.date = DataBook.date;
                     user!.User_Email = DataBook.User_Email;
+                    user!.HoursOffice = DataBook.HoursOffice;
                 }
             }
             else
@@ -88,9 +92,31 @@ namespace BulkyWeb.Areas.Docter.Controllers
                     user!.day = DataBook.day;
                     user!.date = DataBook.date;
                     user!.User_Email = DataBook.User_Email;
+                    user!.HoursOffice = DataBook.HoursOffice;
                 }
             }
+
+            if(user != null)
             return View(user);
+
+            var Data = _userManager.Users
+                        .Select(u => new ApplicationUser
+                        {
+                            Email = u.Email ?? "Unknown",
+                            Name = u.Name ?? "Unknown",
+                            TypeUser = u.TypeUser ?? "Unknown"
+                        }).ToList();
+
+            var Obj = Data.Where(x => x.Email == userEmail).FirstOrDefault();
+
+            var BookData = new BookingPagecs
+            {
+                User_Name = Obj.Name,
+                User_Email = Obj.Email,
+                TypeUser = Obj.TypeUser,
+            };
+
+            return View(BookData);
         }
     }
 }

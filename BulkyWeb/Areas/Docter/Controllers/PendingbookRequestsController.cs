@@ -28,7 +28,7 @@ namespace BulkyWeb.Areas.Docter.Controllers
         {
             var userEmail = HttpContext.Session.GetString("UserEmail"); // For Docter Just
             List<BookingPagecs> objCategoryList = _UnitOfWorkRepositra.BookingPages.GetAll().ToList();
-            objCategoryList = objCategoryList.Where(x => x.Requst == null && x.TypeUser == "Student" && x.User_Email == userEmail).ToList();
+            objCategoryList = objCategoryList.Where(x => x.TypeUser == "Student" && x.User_Email == userEmail).ToList();
             return View(objCategoryList);
         }
 
@@ -71,6 +71,8 @@ namespace BulkyWeb.Areas.Docter.Controllers
                     User_Name = Obj.Name,
                     User_Email = Obj.Email,
                     Requst = category.Requst,
+                    time = category.time,
+                    date = category.date
                 };
 
                 SentEmail(BookData);
@@ -87,10 +89,10 @@ namespace BulkyWeb.Areas.Docter.Controllers
             {
                 var message =
                 new Messsage(new string[]
-                { obj.User_Email }, "Your Company Registration is Approved",
-                $"Dear [{obj.User_Name}],\r\n\r\nWe are pleased to inform you that your company registration has been approved. You can now log in and start using our services." +
-                $"\r\n\r\n[http://localhost:5173/login]\r\n\r\n" +
-                $"Thank you for choosing us.\r\nBest regards,\r\n[{obj.User_Name}]");
+                { obj.User_Email }, "Your Booking Registration is Approved",
+                $"Dear [{obj.User_Name}],\r\n\r\nWe are pleased to confirm your appointment scheduled on {obj.date} at {obj.time}." +
+                $"\r\n\r\n" +
+                $"Thank you for choosing us.[Appointment Booking]");
 
                 _EmailService.SendEmail(message);
             }
@@ -98,8 +100,8 @@ namespace BulkyWeb.Areas.Docter.Controllers
             {
                 var message =
                 new Messsage(new string[]
-                { obj.User_Email }, "Your Booking Registration is Rejected",
-                $"Dear [{obj.User_Name}],\r\n\r\nWe regret to inform you that your company registration request has been rejected. For more details, please contact our support team: [CareeerPathhub@gmail.com].\r\n\r\nBest regards,\r\n[{obj.User_Name}]");
+                { obj.User_Email }, "Appointment Request Update",
+                $"Dear [{obj.User_Name}],\r\n\r\nUnfortunately, we are unable to confirm your appointment on [{obj.date}] at [{obj.time}].\r\nThank you for your understanding.");
 
                 _EmailService.SendEmail(message);
             }

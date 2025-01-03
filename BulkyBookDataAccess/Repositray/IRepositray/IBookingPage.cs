@@ -1,10 +1,4 @@
 ﻿using BulkyBookModels.Model;
-using BulkyBookModels.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BulkyBookDataAccess.Repositray.IRepositray
 {
@@ -12,5 +6,4 @@ namespace BulkyBookDataAccess.Repositray.IRepositray
     {
         void Update(BookingPagecs BookingPagecsObj);
     }
-  
 }

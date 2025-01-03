@@ -5,7 +5,8 @@
         ICategoryRepositray Category { get; }
         IProductRepositray Product { get; set; }
         IBookingPage BookingPages { get; set; }
-       
+        FeedbackInterface Feedback { get; set; }
+
         void Save();
     }
 }

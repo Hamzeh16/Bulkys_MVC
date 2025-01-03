@@ -14,5 +14,7 @@ namespace BulkyBookModels.Model
         public string? User_Name  { get; set; }
         public int? IDNumber  { get; set; }
         public bool? Requst {  get; set; }
+        [Range(3,8)]
+        public int? HoursOffice { get; set; }
     }
 }

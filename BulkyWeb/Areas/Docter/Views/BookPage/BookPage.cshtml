@@ -1,0 +1,121 @@
+﻿@using BulkyBookModels.Model
+@model BookingPagecs
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking To Meet</title>
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/styler.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <header id="NAVBAR"></header>
+    <div id="style_container">
+        <div class="styler_header">Pick Your Date And Time To Meet</div>
+        <form id="time_picker" method="post">
+            <input class="inputz" asp-for="@Model.User_Email" name="User_Email" id="date" type="hidden" />
+            <input class="inputz" asp-for="@Model.User_Name" name="User_Name" id="date" type="hidden" />
+            <input class="inputz" asp-for="@Model.IDNumber" name="IDNumber" id="date" type="hidden" />
+            <input class="inputz" asp-for="@Model.TypeUser" name="TypeUser" id="date" type="hidden" />
+
+            @if (Model.TypeUser == "Docter")
+            {
+                <input class="inputz" asp-for="@Model.day" name="day" id="date" type="text" required />
+
+                <br />
+                <input class="inputz" asp-for="date" name="date" id="date" type="date" required />
+                <br />
+                <input class="inputz" asp-for="@Model.HoursOffice" name="HoursOffice" id="date" type="text" />
+            }
+
+            @if (Model.TypeUser == "Student")
+            {
+                <input class="inputz" readonly asp-for="@Model.day" name="day" id="date" type="text" required />
+
+                <br />
+                <input class="inputz" readonly asp-for="@Model.date" name="date" id="date" type="date" required />
+                <br />
+                <select class="inputz" asp-for="@Model.time" name="time" id="time" required>
+                    <option value="" disabled selected> Select Your Time </option>
+                    <option value="@Model.HoursOffice.00">@Model.HoursOffice:00 AM to @Model.HoursOffice:10 AM</option>
+                    <option value="@Model.HoursOffice.10">@Model.HoursOffice:10 AM to @Model.HoursOffice:20 AM</option>
+                    <option value="@Model.HoursOffice.20">@Model.HoursOffice:20 AM to @Model.HoursOffice:30 AM</option>
+                    <option value="@Model.HoursOffice.30">@Model.HoursOffice:30 AM to @Model.HoursOffice:40 AM</option>
+                    <option value="@Model.HoursOffice.40">@Model.HoursOffice:40 AM to @Model.HoursOffice:50 AM</option>
+                    <option value="@Model.HoursOffice.50">@Model.HoursOffice:50 AM to @Model.HoursOffice:59 AM</option>
+                </select>
+            }
+
+            <br />
+            @if (Model.TypeUser == "Docter")
+            {
+                <input class="inputz" id="time_btn" type="submit" value="Confirm" />
+            }
+            @if (Model.TypeUser == "Student")
+            {
+                <input class="inputz" id="time_btn" type="submit" value="Book" />
+            }
+        </form>
+
+        <div class="styler_header"></div>
+        <div id="styler_grid">
+            <form id="time_pickerr" action="">
+                <!--   <input class="inputzz" id="time_btn" type="submit" value="View The Official Page Of Dr" />-->
+
+                <button id="time_btn"><a href="#">View The Official Page Of Dr</a></button>
+
+            </form>
+
+            <form id="time_pickerr" action="">
+                <!--   <input class="inputzz" id="time_btn" type="submit" value="View The Official Page Of Dr" />-->
+
+                <button id="time_btn">
+                    <a href="https://teams.microsoft.com/l/profile/{معرف المستخدم}/{رمز التعريف الفريد}">
+                        Contact Dr On The Teams
+                    </a>
+                </button>
+
+            </form>
+            <form id="time_pickerr" action="">
+                <!--   <input class="inputzz" id="time_btn" type="submit" value="View The Official Page Of Dr" />-->
+
+                <button id="time_btn"><a href="mailto:motaz@hu.edu.jo.com">Contact The Dr Via Email</a></button>
+
+            </form>
+
+            <!-- <form id="time_pickerr" action="file:///C:/Users/Toshiba/OneDrive/Desktop/proj%20test2/html/feedbackForm.html">
+                    <input class="inputzzz" id="time_btn" type="submit" value="Feedback" />
+            </form >-->
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10) month = "0" + month.toString();
+        if (day < 10) day = "0" + day.toString();
+        var maxDate = year + "-" + month + "-" + day;
+        $("#date").attr("min", maxDate);
+    });
+
+    var btn = document.getElementById('time_btn');
+
+    btn.addEventListener('click', () => {
+        alert('Your reservation has been completed successfully');
+    });
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>
+<script type="module" src="~/js/styler.js"></script>

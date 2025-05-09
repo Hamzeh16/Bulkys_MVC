@@ -1,0 +1,35 @@
+﻿@using BulkyBookModels.Model
+@model List<Category>
+<h2>Pending Post Requests</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Category Name
+            </th>
+            <th>
+                Display Order
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td>@request.NAME</td>
+                <td>@request.DISPLAYORDER</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="ID" value="@request.ID" />
+                        <button type="submit" name="action" value="approve" asp-route-id="@request.ID" class="btn btn-success">Approve</button>
+                        <button type="submit" name="action" value="reject" asp-route-id="@request.ID" class="btn btn-danger">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

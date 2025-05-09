@@ -1,0 +1,34 @@
+﻿@using BulkyBookModels.Model
+@model AffiliatePostRequest
+@{
+    ViewBag.Title = "Submit Post Request";
+}
+
+<h2>Submit Post Request</h2>
+
+@* @using (Html.BeginForm("SubmitPostRequest", "Affiliate", FormMethod.Post, new { @class = "form-horizontal" })) *@
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PostTitle, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PostTitle, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PostTitle)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PostContent, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.PostContent, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(m => m.PostContent)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary form-control">Create</button>
+        </div>
+    </div>
+}
